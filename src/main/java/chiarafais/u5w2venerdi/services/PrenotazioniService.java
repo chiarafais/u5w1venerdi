@@ -15,10 +15,13 @@ public class PrenotazioniService {
 
     public void savePrenotazione(Prenotazioni newPrenotazione) {
         if(prenotazioniRepository.existsByPostazioneAndDataPrenotazione(newPrenotazione.getPostazione(), newPrenotazione.getDataPrenotazione())){
-        throw new RuntimeException("non disponibile!");
+        throw new RuntimeException("postazione già occupata..non è disponibile!");
+        }if(prenotazioniRepository.existsByUtenteAndDataPrenotazione(newPrenotazione.getUtente(),newPrenotazione.getDataPrenotazione())){
+            throw new RuntimeException("non puoi prenotare, hai già una prenotazione!");
         }
         prenotazioniRepository.save(newPrenotazione);
         log.info("Prenotazione n° : " + newPrenotazione.getId_prenotazione() + " è stata salvata correttamente");
     }
+
 
 }
