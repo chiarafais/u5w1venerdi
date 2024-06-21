@@ -14,6 +14,9 @@ public class PrenotazioniService {
     private PrenotazioniRepository prenotazioniRepository;
 
     public void savePrenotazione(Prenotazioni newPrenotazione) {
+        if(prenotazioniRepository.existsByPostazioneAndDataPrenotazione(newPrenotazione.getPostazione(), newPrenotazione.getDataPrenotazione())){
+        throw new RuntimeException("non disponibile!");
+        }
         prenotazioniRepository.save(newPrenotazione);
         log.info("Prenotazione n° : " + newPrenotazione.getId_prenotazione() + " è stata salvata correttamente");
     }
