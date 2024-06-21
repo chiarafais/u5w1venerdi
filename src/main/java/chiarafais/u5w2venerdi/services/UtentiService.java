@@ -1,6 +1,8 @@
 package chiarafais.u5w2venerdi.services;
 
+
 import chiarafais.u5w2venerdi.entities.Utenti;
+import chiarafais.u5w2venerdi.exceptions.NotFoundException;
 import chiarafais.u5w2venerdi.repositories.UtentiRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +24,9 @@ public class UtentiService {
 
         utentiRepository.save(newUser);
         log.info("Nuovo utente " + newUser.getUsername() + " salvato correttamente");
+    }
+
+    public Utenti findById(long id){
+        return utentiRepository.findById(id).orElseThrow(()->new NotFoundException(id));
     }
 }

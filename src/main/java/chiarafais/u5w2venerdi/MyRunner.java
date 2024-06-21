@@ -2,6 +2,7 @@ package chiarafais.u5w2venerdi;
 
 import chiarafais.u5w2venerdi.entities.Edifici;
 import chiarafais.u5w2venerdi.entities.Postazioni;
+import chiarafais.u5w2venerdi.entities.Prenotazioni;
 import chiarafais.u5w2venerdi.entities.Utenti;
 import chiarafais.u5w2venerdi.enums.TipoPostazione;
 import chiarafais.u5w2venerdi.services.EdificiService;
@@ -11,6 +12,8 @@ import chiarafais.u5w2venerdi.services.UtentiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 @Component
 public class MyRunner implements CommandLineRunner {
@@ -40,6 +43,8 @@ public class MyRunner implements CommandLineRunner {
         Postazioni postazione2 = new Postazioni(TipoPostazione.PRIVATO,"piccola sala dedicata a voi", 4,edificiService.findById(2));
         Postazioni postazione3 = new Postazioni(TipoPostazione.SALARIUNIONI,"sala ampia e fornita di lavagna smart",20,edificiService.findById(3));
 
+        Prenotazioni prenotazione1 = new Prenotazioni(utentiService.findById(2),postazioniService.findById(2), LocalDate.of(2024,7,25));
+
 //        utentiService.saveUtente(utenteChiara);
 //        utentiService.saveUtente(utenteNikita);
 //        utentiService.saveUtente(utenteLuca);
@@ -50,6 +55,9 @@ public class MyRunner implements CommandLineRunner {
 //        postazioniService.savePostazione(postazione1);
 //        postazioniService.savePostazione(postazione2);
 //        postazioniService.savePostazione(postazione3);
+
+        prenotazioniService.savePrenotazione(prenotazione1);
+
 
     }
 }
